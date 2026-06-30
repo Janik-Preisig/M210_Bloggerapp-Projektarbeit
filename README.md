@@ -2,6 +2,8 @@
 
 Eine multiuser-fähige Blogger-Webapp als Schul-Projektarbeit. Gäste lesen veröffentlichte Beiträge. Registrierte Benutzer verwalten ihre eigenen Beiträge und Titelbilder; Administratoren moderieren alle Inhalte.
 
+Der vollständige Projekt-Pitch steht in [PITCH.md](PITCH.md).
+
 ## Funktionen
 
 - Registrierung, Login, persistente Session und Logout mit Supabase Auth
@@ -75,4 +77,13 @@ supabase/schema.sql    Tabellen, Trigger, RLS und Storage
 .github/workflows/     CI-Pipeline
 ```
 
-Weitere Entscheidungen stehen in [ARCHITECTURE.md](ARCHITECTURE.md), das ER-Diagramm in [DATENMODELL.md](DATENMODELL.md) und Deployment-Hinweise in [DEPLOYMENT.md](DEPLOYMENT.md).
+## Projektdokumentation
+
+- [Projekt-Pitch](PITCH.md)
+- [User Stories](USER_STORIES.md)
+- [Arbeitsplan](WORK_PLAN.md) und [Zeiterfassung](TIME_LOG.md)
+- [Architektur](ARCHITECTURE.md) und [Datenmodell](DATENMODELL.md)
+- [Deployment](DEPLOYMENT.md) und [kritisches Review](REVIEW.md)
+- [Bewertungsnachweis](BEWERTUNGSNACHWEIS.md)
+- [Hilfsmittel und KI-Unterstützung](HILFSMITTEL.md)
+- [Abgabe und GitHub-Arbeitsweise](ABGABE.md)
