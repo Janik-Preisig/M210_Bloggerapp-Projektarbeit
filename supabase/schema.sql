@@ -16,6 +16,8 @@ create table if not exists public.posts (
   content text not null check (char_length(content) > 0),
   category text not null check (char_length(category) between 1 and 80),
   status text not null default 'draft' check (status in ('draft', 'published', 'disabled')),
+  image_url text,
+  image_path text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -89,6 +91,16 @@ with check ((user_id = auth.uid() and status in ('draft', 'published')) or publi
 drop policy if exists "posts_owner_or_admin_delete" on public.posts;
 create policy "posts_owner_or_admin_delete" on public.posts for delete to authenticated
 using (user_id = auth.uid() or public.is_admin());
+
+-- Öffentlicher Bucket: URLs sind lesbar, Schreiben/Löschen bleibt per Policy geschützt.
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('post-images', 'post-images', true, 5242880, array['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+on conflict (id) do update set public = excluded.public, file_size_limit = excluded.file_size_limit, allowed_mime_types = excluded.allowed_mime_types;
+
+-- Die Policies für storage.objects werden im Supabase Dashboard unter
+-- Storage -> Policies -> OBJECTS angelegt. Manche Projekte erlauben dem
+-- SQL Editor nicht, Policies auf dieser von Supabase verwalteten Tabelle
+-- zu erstellen oder zu löschen ("must be owner of table objects").
 
 -- Nach dem ersten Login einen Benutzer manuell zum Admin machen:
 -- update public.profiles set role = 'admin' where id = 'USER_UUID';

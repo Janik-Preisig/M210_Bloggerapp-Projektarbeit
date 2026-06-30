@@ -23,6 +23,7 @@ export default function DashboardPage() {
     if (!window.confirm(`„${post.title}“ wirklich löschen?`)) return
     const { error: deleteError } = await supabase.from('posts').delete().eq('id', post.id).eq('user_id', user.id)
     if (deleteError) { setError(deleteError.message); return }
+    if (post.image_path) await supabase.storage.from('post-images').remove([post.image_path])
     setPosts((current) => current.filter((item) => item.id !== post.id))
   }
 
