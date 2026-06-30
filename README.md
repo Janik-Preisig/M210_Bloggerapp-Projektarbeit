@@ -42,7 +42,7 @@ Vite zeigt anschließend die lokale URL an (normalerweise `http://localhost:5173
 
 Unter **Authentication → URL Configuration** die Site URL auf die lokale beziehungsweise produktive Frontend-URL setzen. Ob eine Registrierung sofort einloggt oder zuerst eine E-Mail-Bestätigung verlangt, wird unter **Authentication → Providers → Email** gesteuert.
 
-Der Storage-Bucket und alle Policies werden durch das Schema erzeugt. Um ein Konto zum Admin zu machen, nach dessen Registrierung einmalig im SQL Editor ausführen:
+Der Storage-Bucket wird durch das Schema erzeugt. Die dort dokumentierten Policies für `storage.objects` werden unter **Storage → Policies → OBJECTS** angelegt. Um ein Konto zum Admin zu machen, nach dessen Registrierung einmalig im SQL Editor ausführen:
 
 ```sql
 update public.profiles
@@ -75,4 +75,4 @@ supabase/schema.sql    Tabellen, Trigger, RLS und Storage
 .github/workflows/     CI-Pipeline
 ```
 
-Weitere Entscheidungen stehen in [ARCHITECTURE.md](ARCHITECTURE.md), Deployment-Hinweise in [DEPLOYMENT.md](DEPLOYMENT.md).
+Weitere Entscheidungen stehen in [ARCHITECTURE.md](ARCHITECTURE.md), das ER-Diagramm in [DATENMODELL.md](DATENMODELL.md) und Deployment-Hinweise in [DEPLOYMENT.md](DEPLOYMENT.md).
