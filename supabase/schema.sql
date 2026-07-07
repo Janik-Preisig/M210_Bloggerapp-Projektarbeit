@@ -59,17 +59,26 @@ returns boolean language sql stable security definer set search_path = '' as $$
   select exists (select 1 from public.profiles where id = auth.uid() and role = 'admin');
 $$;
 revoke all on function public.is_admin() from public;
-grant execute on function public.is_admin() to authenticated;
+-- Auch anonyme Post-Abfragen werten die SELECT-Policy aus. Für Gäste liefert
+-- die Funktion wegen fehlender auth.uid() stets false.
+grant execute on function public.is_admin() to anon, authenticated, service_role;
 
 create or replace function public.current_user_role()
 returns text language sql stable security definer set search_path = '' as $$
   select coalesce((select role from public.profiles where id = auth.uid()), 'user');
 $$;
 revoke all on function public.current_user_role() from public;
-grant execute on function public.current_user_role() to authenticated;
+grant execute on function public.current_user_role() to authenticated, service_role;
 
 alter table public.profiles enable row level security;
 alter table public.posts enable row level security;
+
+-- API-Berechtigungen; RLS schränkt die tatsächlich sichtbaren Zeilen ein.
+grant usage on schema public to anon, authenticated;
+grant select on public.posts to anon, authenticated;
+grant insert, update, delete on public.posts to authenticated;
+grant select, update on public.profiles to authenticated;
+grant all on public.posts, public.profiles to service_role;
 
 drop policy if exists "profiles_select_own_or_admin" on public.profiles;
 create policy "profiles_select_own_or_admin" on public.profiles for select
