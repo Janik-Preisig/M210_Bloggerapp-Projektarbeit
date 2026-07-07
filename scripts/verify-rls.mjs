@@ -84,6 +84,35 @@ try {
   const { error: promoteError } = await service.from('profiles').update({ role: 'admin' }).eq('id', admin.user.id)
   assert.ifError(promoteError)
 
+  const imageBytes = new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10])
+  const ownerImagePath = `${userA.user.id}/owner-test.png`
+  const adminImagePath = `${userA.user.id}/admin-test.png`
+
+  const { error: ownerUploadError } = await userA.client.storage
+    .from('post-images').upload(ownerImagePath, imageBytes, { contentType: 'image/png' })
+  assert.ifError(ownerUploadError)
+
+  const { error: foreignDeleteError } = await userB.client.storage.from('post-images').remove([ownerImagePath])
+  assert.ifError(foreignDeleteError)
+  const { data: afterForeignDelete, error: afterForeignDeleteError } = await userA.client.storage
+    .from('post-images').list(userA.user.id, { search: 'owner-test.png' })
+  assert.ifError(afterForeignDeleteError)
+  assert.equal(afterForeignDelete.length, 1, 'Benutzer B darf das Bild von Benutzer A nicht löschen')
+
+  const { error: ownerDeleteError } = await userA.client.storage.from('post-images').remove([ownerImagePath])
+  assert.ifError(ownerDeleteError)
+  const { data: afterOwnerDelete, error: afterOwnerDeleteError } = await userA.client.storage
+    .from('post-images').list(userA.user.id, { search: 'owner-test.png' })
+  assert.ifError(afterOwnerDeleteError)
+  assert.equal(afterOwnerDelete.length, 0, 'Benutzer A muss das eigene Bild löschen können')
+
+  const { error: adminTargetUploadError } = await userA.client.storage
+    .from('post-images').upload(adminImagePath, imageBytes, { contentType: 'image/png' })
+  assert.ifError(adminTargetUploadError)
+
+  const { error: adminImageDeleteError } = await admin.client.storage.from('post-images').remove([adminImagePath])
+  assert.ifError(adminImageDeleteError)
+
   const { data: allPosts, error: adminReadError } = await admin.client.from('posts').select('id').eq('id', draft.id)
   assert.ifError(adminReadError)
   assert.equal(allPosts.length, 1, 'Admin muss fremde Beiträge lesen können')
@@ -98,7 +127,7 @@ try {
   const { error: deleteError } = await admin.client.from('posts').delete().eq('id', draft.id)
   assert.ifError(deleteError)
 
-  console.log('RLS-Integrationstest erfolgreich: Auth, Public-Zugriff, Besitztrennung und Admin-Moderation geprüft.')
+  console.log('RLS-Integrationstest erfolgreich: Auth, CRUD, Besitztrennung, Storage und Admin-Moderation geprüft.')
 } finally {
   for (const userId of createdUsers) {
     const { error } = await service.auth.admin.deleteUser(userId)
