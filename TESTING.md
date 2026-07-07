@@ -31,7 +31,7 @@ npx supabase stop
 
 Die lokalen Schlüssel zeigt `npx supabase status` an. Der `service_role`-Key wird ausschließlich für Test-Setup und Aufräumen verwendet und niemals in eine Datei oder das Frontend geschrieben.
 
-Zuletzt lokal ausgeführt am 07.07.2026: **bestanden**. Geprüft wurden Registrierung und Session, öffentliche Sichtbarkeit, Besitztrennung zwischen zwei Benutzern, eigenes CRUD, verhinderte Rollenerhöhung sowie Lesen, Deaktivieren und Löschen durch einen Administrator. Die Testbenutzer wurden anschließend automatisch gelöscht.
+Zuletzt lokal ausgeführt am 07.07.2026: **bestanden**. Geprüft wurden Registrierung und Session, öffentliche Sichtbarkeit, Besitztrennung zwischen zwei Benutzern, eigenes CRUD, verhinderte Rollenerhöhung, geschützter Bild-Upload sowie Lesen, Deaktivieren und Löschen durch einen Administrator. Testbenutzer und Testdateien wurden anschließend gelöscht.
 
 ## Gehostetes Projekt
 
