@@ -22,6 +22,10 @@ KI-generierte oder vorgeschlagene Inhalte sind nicht automatisch ein Nachweis de
 - effektive Arbeitszeiten persönlich und wahrheitsgemäß einzutragen,
 - die finale Anwendung selbst vorzuführen und offene Einschränkungen zu benennen.
 
+## Entstehung und Git-Historie
+
+Ein wesentlicher Teil des initialen Projektstands wurde mit Unterstützung von OpenAI Codex vorbereitet und am 30.06.2026 in kurzer Folge in fachlich getrennte Commits überführt. Die dichten Commit-Zeitstempel bilden daher nicht die Dauer der einzelnen Arbeitspakete ab. Spätere Sicherheitsprüfungen wurden über eigene Issues, Feature-Branches und die gemergten Pull Requests #6 und #7 nachvollziehbar ergänzt. Diese Einordnung ist bewusst dokumentiert, damit die Historie nicht fälschlich als zeitgenaues Arbeitsprotokoll verstanden wird.
+
 ## Fremdkomponenten
 
 Die verwendeten Laufzeit- und Entwicklungsabhängigkeiten sind in `package.json` und `package-lock.json` mit ihren Versionen aufgeführt. Supabase stellt die verwalteten Systeme für Authentifizierung, Datenbank und Storage bereit. Diese Komponenten sind nicht selbst entwickelt; die anwendungsspezifische Konfiguration, das Datenmodell und die Zugriffsregeln liegen im Repository.
