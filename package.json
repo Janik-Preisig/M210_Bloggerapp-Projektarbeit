@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
+    "test:rls": "node scripts/verify-rls.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
