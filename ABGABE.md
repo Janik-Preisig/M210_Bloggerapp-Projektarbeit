@@ -6,6 +6,8 @@
 - Einstieg und lokale Installation: [`README.md`](README.md)
 - Bewertungsübersicht: [`BEWERTUNGSNACHWEIS.md`](BEWERTUNGSNACHWEIS.md)
 - Verwendete Hilfsmittel: [`HILFSMITTEL.md`](HILFSMITTEL.md)
+- Tests und Prüfergebnisse: [`TESTING.md`](TESTING.md)
+- Zeiterfassung: [`TIME_LOG.md`](TIME_LOG.md)
 
 ## Umgebungsvariablen
 
@@ -17,6 +19,12 @@ VITE_SUPABASE_ANON_KEY=...
 ```
 
 Falls die Lehrperson die konfigurierte `.env` zum Nachvollziehen verlangt, wird sie separat über den vereinbarten privaten Abgabekanal übermittelt. Secrets oder Zugangsdaten werden niemals in ein öffentliches GitHub-Repository committed.
+
+## Finale Übergabe
+
+- Repository: `https://github.com/Janik-Preisig/M210_Bloggerapp-Projektarbeit`
+- `.env`: separat und privat an die Lehrperson übermitteln
+- Bei NHP: erforderliches Arztzeugnis separat über den vorgesehenen administrativen Kanal einreichen
 
 ## GitHub-Arbeitsweise
 

@@ -6,13 +6,13 @@ Die Pflichtanforderungen sind im Code abgedeckt: Supabase-Authentifizierung, per
 
 Die Oberfläche bleibt bewusst einfach. Kleine Komponenten, direkte Abfragen und ein zentrales Auth-Context-Modul sind für eine Schulprojektarbeit leichter zu erklären als ein zusätzlicher globaler State- oder API-Layer.
 
-## Noch manuell zu prüfen
+## Qualitätssicherung
 
-Die Anwendung benötigt ein echtes Supabase-Projekt und konnte nicht allein durch statische Dateien end-to-end geprüft werden. Vor Abgabe müssen Schema, Registrierung mit der gewählten E-Mail-Einstellung, Upload und alle RLS-Rollen praktisch getestet werden. Die persönliche effektive Arbeitszeit muss in `TIME_LOG.md` nachgeführt werden.
+Lint und Produktions-Build liefen am 07.07.2026 lokal sowie in GitHub Actions erfolgreich. Zusätzlich prüft `scripts/verify-rls.mjs` Authentifizierung, öffentliches Lesen, eigenes CRUD, Besitztrennung, verhinderte Rollenerhöhung, Storage-Policies und Admin-Moderation gegen eine lokale Supabase-Instanz. Der Test wurde am 07.07.2026 erfolgreich ausgeführt. Der Ablauf im Browser mit dem für die Vorführung verwendeten gehosteten Projekt bleibt eine manuelle Abschlusskontrolle.
 
 ## Einschränkungen
 
-- Keine automatisierten Komponenten- oder End-to-End-Tests
+- Keine automatisierten Komponenten- oder Browser-End-to-End-Tests; die zentralen Datenbankregeln besitzen jedoch einen Integrationstest
 - Keine Passwort-zurücksetzen-Seite
 - Keine Pagination oder Suche; bei vielen Beiträgen wäre beides nötig
 - Kein Rich Text und keine Kommentare
@@ -21,4 +21,4 @@ Die Anwendung benötigt ein echtes Supabase-Projekt und konnte nicht allein durc
 
 ## Sinnvolle nächste Schritte
 
-Zuerst sollten RLS-Integrationstests mit vier Rollen entstehen. Danach wären Pagination, ein privater Bild-Bucket mit Signed URLs und eine Passwort-Reset-Strecke die wertvollsten Erweiterungen. Eine Rich-Text-Lösung sollte erst folgen, wenn HTML-Sanitizing und XSS-Schutz sauber geplant sind.
+Als nächste Schritte wären Browser-End-to-End-Tests, Pagination, ein privater Bild-Bucket mit Signed URLs und eine Passwort-Reset-Strecke am wertvollsten. Eine Rich-Text-Lösung sollte erst folgen, wenn HTML-Sanitizing und XSS-Schutz sauber geplant sind.
